@@ -27,6 +27,7 @@ $queryResult = $pdo->query("SELECT * FROM users");
             echo '<td>' . $row['name'] . '</td>';
             echo '<td>' . $row['email'] . '</td>';
             echo '<td><a href="update.php?id='. $row['id'] . '">Edit</a>';
+            echo '<td><a href="delete.php?id='. $row['id'] . '">Delete</a>';
             echo '</tr>';
         }
         ?>
