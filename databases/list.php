@@ -3,6 +3,7 @@
 require_once 'config.php';
 
 $queryResult = $pdo->query("SELECT * FROM users");
+
 ?>
 <html>
 <head>
