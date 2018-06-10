@@ -1,16 +1,3 @@
-<?php
-
-$result =  false;
-
-if (!empty($_POST)) {
-    $sql = 'INSERT INTO blog_posts (title, content) VALUES (:title, :content)';
-    $query = $pdo->prepare($sql);
-    $result = $query->execute([
-        'title' => $_POST['title'],
-        'content' => $_POST['content']
-    ]);
-}
-?>
 <html>
 <head>
     <title>Blog with Platzi</title>
@@ -25,28 +12,15 @@ if (!empty($_POST)) {
         </div>
 
         <div class="row">
-            <h2>New Post</h2>
-            <p>
-                <a class="btn btn-default" href="posts.php">Back</a>
-            </p>
-            <?php
-                if ($result) {
-                    echo '<div class="alert alert-success">Post Saved!</div>';
-                }
-            ?>
 
             <div class="col-md-8">
+                <h2>Admin Panel</h2>
+                <ul>
+                    <li>
+                        <a href="<?php echo BASE_URL; ?>admin/posts">Manage Posts</a>
+                    </li>
+                </ul>
 
-                <form action="insert-post.php" method="post">
-                    <div class="form-group">
-                        <label for="inputTitle">Title</label>
-                        <input class="form-control" type="text" name="title" id="inputTitle">
-
-                    </div>
-                    <textarea class="form-control" name="content" id="inputContent" rows="5"></textarea>
-                    <br>
-                    <input class="btn btn-primary" type="submit" value="Save">
-                </form>
             </div>
             <div class="col-md-4">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus quam et sem finibus facilisis at nec libero. Aenean vitae sollicitudin erat, vel dictum elit. Duis vel urna vel lectus tempor vehicula. Nullam tincidunt quam id condimentum malesuada. Morbi id euismod elit. Etiam quis tincidunt nibh. Proin in diam quis ex hendrerit commodo. Nulla eget pulvinar felis. Duis a sem eu neque convallis egestas ac vel justo. In lacus mauris, tincidunt in libero a, ornare auctor sapien. Sed maximus neque ac felis tincidunt ultricies.
@@ -56,7 +30,7 @@ if (!empty($_POST)) {
             <div class="col-md-12">
                 <footer>
                     This is a footer<br>
-                    <a href="index.php">Admin Panel</a>
+                    <a href="<?php echo BASE_URL; ?>admin">Admin Panel</a>
                 </footer>
             </div>
         </div>
@@ -64,3 +38,4 @@ if (!empty($_POST)) {
     </div>
 </div>
 </body>
+</html>
