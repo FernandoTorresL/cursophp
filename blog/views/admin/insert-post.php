@@ -17,7 +17,7 @@
                 <a class="btn btn-default" href="<?php echo BASE_URL; ?>admin/posts">Back</a>
             </p>
             <?php
-                if (isset($result) && $result {
+                if (isset($result) && $result ) {
                     echo '<div class="alert alert-success">Post Saved!</div>';
                 }
             ?>
