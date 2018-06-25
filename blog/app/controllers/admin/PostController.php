@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\BlogPost;
+use Sirius\Validation\Validator;
 
 class PostController extends BaseController {
 
@@ -18,15 +19,31 @@ class PostController extends BaseController {
     }
 
     public function postCreate() {
-        $blogPost = new BlogPost([
-            'title' => $_POST['title'],
-            'content' => $_POST['content']
+        $errors = [];
+        $result = false;
+
+        $validator = new Validator();
+
+        $validator->add('title', 'required');
+        $validator->add('content', 'required');
+
+        if ($validator->validate($_POST)) {
+            $blogPost = new BlogPost([
+                'title' => $_POST['title'],
+                'content' => $_POST['content']
+            ]);
+            $blogPost->save();
+
+            $result = true;
+        } else {
+            $errors1 = $validator->addMessage('title', 'El título es campo obligatorio');
+            $errors2 = $validator->addMessage('content', 'El contenido es campo obligatorio');
+            $errors = $validator->getMessages();
+        }
+
+        return $this->render('admin/insert-post.twig', [
+            'result' => $result,
+            'errors' => $errors
         ]);
-        $blogPost->save();
-
-        $result = true;
-
-        return $this->render('admin/insert-post.twig', ['result' => $result]);
-
     }
 }
