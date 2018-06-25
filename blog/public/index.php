@@ -6,8 +6,8 @@
 
     require_once '../vendor/autoload.php';
 
+    session_start();
 
-    $baseUrl = '';
     $baseDir = str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
     $baseUrl = 'http://' . $_SERVER['HTTP_HOST'] . $baseDir;
     define('BASE_URL', $baseUrl);
@@ -20,7 +20,6 @@
     use Illuminate\Database\Capsule\Manager as Capsule;
 
     $capsule = new Capsule;
-
     $capsule->addConnection([
         'driver'    => 'mysql',
         'host'      => getenv('DB_HOST'),
@@ -34,17 +33,16 @@
 
     // Make this Capsule instance available globally via static methods... (optional)
     $capsule->setAsGlobal();
-
     // Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
     $capsule->bootEloquent();
 
     $route = $_GET['route'] ?? '/';
 
-
     use Phroute\Phroute\RouteCollector;
 
     $router = new RouteCollector();
 
+    $router->controller('/auth', App\Controllers\AuthController::class);
     $router->controller('/admin', App\Controllers\Admin\IndexController::class);
     $router->controller('/admin/posts', App\Controllers\Admin\PostController::class);
     $router->controller('/admin/users', App\Controllers\Admin\UserController::class);
@@ -54,10 +52,3 @@
     $response = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'], $route);
 
     echo $response;
-
-
-//    $router->get($route, $handler);    # match only get requests
-//    $router->post($route, $handler);   # match only post requests
-//    $router->delete($route, $handler); # match only delete requests
-//    $router->any($route, $handler);    # match any request method
-
