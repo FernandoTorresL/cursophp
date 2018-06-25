@@ -14,16 +14,19 @@
 //    var_dump($baseDir);
 //    var_dump($baseUrl);
 
+    $dotenv = new \Dotenv\Dotenv(__DIR__ . '/..');
+    $dotenv->load();
+
     use Illuminate\Database\Capsule\Manager as Capsule;
 
     $capsule = new Capsule;
 
     $capsule->addConnection([
         'driver'    => 'mysql',
-        'host'      => 'localhost',
-        'database'  => 'cursophp',
-        'username'  => 'root',
-        'password'  => '119678-29992',
+        'host'      => getenv('DB_HOST'),
+        'database'  => getenv('DB_NAME'),
+        'username'  => getenv('DB_USER'),
+        'password'  => getenv('DB_PASS'),
         'charset'   => 'utf8',
         'collation' => 'utf8_unicode_ci',
         'prefix'    => '',
