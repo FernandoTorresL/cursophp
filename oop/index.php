@@ -2,14 +2,27 @@
 
 include 'Vehicles/Car.php';
 include 'Vehicles/Truck.php';
+include 'Vehicles/ToyCar.php';
 
 //use Vehicles\Car;
 //use Vehicles\Truck;
-use Vehicles\{Car, Truck};
+use Vehicles\{Car, Truck, ToyCar};
 
 //interface MyInterface {
 //    public function method1();
 //}
+
+try {
+    echo 'Class ToyCar<br>';
+    $toycar = new ToyCar('Alex');
+    $toycar->move();
+    //echo 'Owner car: ' . $car->getOwner() . '<br>';
+} catch (Exception $e) {
+    echo 'This is a toy<br>';
+    //log...
+} finally {
+    echo 'finally<br><br>';
+}
 
 echo 'Class Car<br>';
 $car = new Car('Alex');
