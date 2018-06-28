@@ -17,7 +17,10 @@ $truck = new Truck('Max', 'Pickup');
 $truck->move();
 
 echo '<br>Class Truck 2<br>';
-$truck = new Truck('Max', 'Pickup');
-$truck->move();
+$truck2 = new Truck('Max', 'Pickup');
+$truck2->move();
 
 echo '<br>Total Trucks: ' . Truck::getTotal() . '<br><br>';
+
+//$v1 = new \Vehicles\VehicleBase('Alex');
+//$v1->move();
