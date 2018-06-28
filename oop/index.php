@@ -12,7 +12,12 @@ $car = new Car('Alex');
 $car->move();
 echo 'Owner car: ' . $car->getOwner() . '<br>';
 
-echo '<br>Class Truck<br>';
+echo '<br>Class Truck 1<br>';
 $truck = new Truck('Max', 'Pickup');
 $truck->move();
-echo 'Owner truck: ' . $truck->getOwner() . '<br><br>';
+
+echo '<br>Class Truck 2<br>';
+$truck = new Truck('Max', 'Pickup');
+$truck->move();
+
+echo '<br>Total Trucks: ' . Truck::getTotal() . '<br><br>';
